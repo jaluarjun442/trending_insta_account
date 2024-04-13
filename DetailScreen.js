@@ -60,7 +60,7 @@ const DetailScreen = ({ route, navigation }) => {
     <View style={styles.mainUserInfo}>
       <BannerAd
         unitId={adUnitId}
-        size={BannerAdSize.BANNER}
+        size={BannerAdSize.MEDIUM_RECTANGLE}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
         }}
@@ -86,7 +86,7 @@ const DetailScreen = ({ route, navigation }) => {
       <Text style={styles.sectionTitle}>Other Profiles</Text>
       <BannerAd
         unitId={adUnitId}
-        size={BannerAdSize.BANNER}
+        size={BannerAdSize.MEDIUM_RECTANGLE}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
         }}
@@ -109,15 +109,15 @@ const DetailScreen = ({ route, navigation }) => {
       }}
       keyExtractor={item => item.id || item.key}
       contentContainerStyle={styles.container}
-      ListFooterComponent={() => (
-        <BannerAd
-          unitId={adUnitId}
-          size={BannerAdSize.BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-          }}
-        />
-      )}
+      // ListFooterComponent={() => (
+      //   <BannerAd
+      //     unitId={adUnitId}
+      //     size={BannerAdSize.MEDIUM_RECTANGLE}
+      //     requestOptions={{
+      //       requestNonPersonalizedAdsOnly: true,
+      //     }}
+      //   />
+      // )}
     />
   );
 };
