@@ -1,10 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+import { InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
 const adUnitIdLive = 'ca-app-pub-9187335266224900/4404839702'; // Replace with your own Ad Unit ID
 // const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
 const adUnitId = adUnitIdLive;
+
+const adUnitIdinterstitialLive = "ca-app-pub-9187335266224900/3140176725";
+// const adUnitIdinterstitial = __DEV__ ? TestIds.INTERSTITIAL : adUnitIdinterstitialLive;
+const adUnitIdinterstitial = adUnitIdinterstitialLive;
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitIdinterstitial, {
+  keywords: ['dating', 'social'],
+});
 
 const DetailScreen = ({ route, navigation }) => {
   const { user } = route.params;
@@ -12,6 +21,10 @@ const DetailScreen = ({ route, navigation }) => {
   const flatListRef = useRef(null);
 
   useEffect(() => {
+    interstitial.load();
+    const is_interstitial_loaded = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      interstitial.show();
+    });
     fetchOtherProfiles();
   }, []);
 
@@ -109,15 +122,15 @@ const DetailScreen = ({ route, navigation }) => {
       }}
       keyExtractor={item => item.id || item.key}
       contentContainerStyle={styles.container}
-      // ListFooterComponent={() => (
-      //   <BannerAd
-      //     unitId={adUnitId}
-      //     size={BannerAdSize.MEDIUM_RECTANGLE}
-      //     requestOptions={{
-      //       requestNonPersonalizedAdsOnly: true,
-      //     }}
-      //   />
-      // )}
+    // ListFooterComponent={() => (
+    //   <BannerAd
+    //     unitId={adUnitId}
+    //     size={BannerAdSize.MEDIUM_RECTANGLE}
+    //     requestOptions={{
+    //       requestNonPersonalizedAdsOnly: true,
+    //     }}
+    //   />
+    // )}
     />
   );
 };

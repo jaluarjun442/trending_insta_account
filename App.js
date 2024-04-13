@@ -5,11 +5,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DetailScreen from './DetailScreen'; // Import the DetailScreen component
 import BottomMenu from './BottomMenu'; // Import the BottomMenu component
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+import { InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
 const adUnitIdLive = 'ca-app-pub-9187335266224900/4404839702'; // Replace with your own Ad Unit ID
 // const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
 const adUnitId = adUnitIdLive;
 
+const adUnitIdinterstitialLive = "ca-app-pub-9187335266224900/3140176725";
+// const adUnitIdinterstitial = __DEV__ ? TestIds.INTERSTITIAL : adUnitIdinterstitialLive;
+const adUnitIdinterstitial = adUnitIdinterstitialLive;
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitIdinterstitial, {
+  keywords: ['dating', 'social'],
+});
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
@@ -20,7 +28,11 @@ const HomeScreen = ({ navigation }) => {
   const [nextPageUrl, setNextPageUrl] = useState(null);
 
   useEffect(() => {
+    interstitial.load();
     fetchData();
+    const is_interstitial_loaded = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      interstitial.show();
+    });
   }, []);
 
   const fetchData = () => {
@@ -48,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
           <Image style={styles.image} source={{ uri: item.image }} />
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.username}>{item.instagramUsername}</Text>
+            <Text style={styles.username}>{item.username}</Text>
           </View>
         </View>
         {(index + 1) % 3 === 0 && index !== 0 ? ( // Display AdMob banner after every 3rd item
