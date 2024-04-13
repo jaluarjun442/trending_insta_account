@@ -3,7 +3,8 @@ import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, Linking } fr
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 const adUnitIdLive = 'ca-app-pub-9187335266224900/4404839702'; // Replace with your own Ad Unit ID
-const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
+// const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
+const adUnitId = adUnitIdLive;
 
 const DetailScreen = ({ route, navigation }) => {
   const { user } = route.params;
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     height: 250,
     borderRadius: 20,
     marginBottom: 10,
-    marginTop:5,
+    marginTop: 5,
   },
   mainUserName: {
     fontSize: 24,

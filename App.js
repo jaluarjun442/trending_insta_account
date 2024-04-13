@@ -7,7 +7,8 @@ import BottomMenu from './BottomMenu'; // Import the BottomMenu component
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 const adUnitIdLive = 'ca-app-pub-9187335266224900/4404839702'; // Replace with your own Ad Unit ID
-const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
+// const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : adUnitIdLive;
+const adUnitId = adUnitIdLive;
 
 const Stack = createStackNavigator();
 
